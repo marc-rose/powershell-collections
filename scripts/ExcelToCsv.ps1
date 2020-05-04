@@ -9,7 +9,7 @@ Function ExcelToCSV ($File) {
 # This code creates a COM object to use Excel features.
     $Excel.Visible = $false
     $Excel.DisplayAlerts = $false
-# Excel runs invisible and no displays no alerts while running macros
+# Excel runs invisible and displays no alerts while running macros
     $wb = $Excel.Workbooks.Open($excelFile)
     foreach ($ws in $wb.Worksheets)
     {
