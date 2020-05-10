@@ -14,25 +14,25 @@ $properties =
   "City" = $User.City
   "Country" = $User.Country
   "Department" = $User.Department
-  "SamAccountName" = $User.FirstName + "." + $User.Surname
-  "Name" = $User.FirstName + " " + $User.Surname
+  "SamAccountName" = $User.FirstName + '.' + $User.Surname
+  "Name" = $User.FirstName + ' ' + $User.Surname
   "DisplayName" = $User.FirstName + " " + $User.Surname
-  "Email" = $User.FirstName + $User.Surname + "@chair.corp.com"
+  "Email" = $User.FirstName + $User.Surname + '@chair.corp.com'
   
   }
 
 
   $Pass = [System.Web.Security.Membership]::GeneratePassword(16,4)
-  # create plaintext password with .NET
-  # System.Web.Security namespace; Memberhip class; GeneratePassword method
+# create plaintext password using .NET
+# namespace=System.Web.Security; class=Membership; method=GeneratePassword
   $SecurePass = $Pass | Convert-ToSecureString -AsPlainText -Force
-  # convert to secure password
+# convert to secure variable
   
   New-ADUser @properties -Enabled $True `
-  # feeding object $properties (with @) into cmdlet, all 
-  # escape character ` for formatting
+# feeding object $properties (with @) into cmdlet, all 
+# escape character ` for formatting
              -ChangePasswordAtLogin $True `
              -AccountPassword $SecurePass `
-             -Path "CN=$($User.Department),DC=chair,DC=corp,DC=com"
+             -Path "CN=$($User.Department),DC=chair,DC=corp,DC=com" -Verbose
              
 } # End of Foreach
